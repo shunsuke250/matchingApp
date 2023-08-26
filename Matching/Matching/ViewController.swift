@@ -8,6 +8,8 @@
 import UIKit
 import SnapKit
 import SwiftUI
+import FirebaseCore
+import FirebaseAuth
 
 class ViewController: UIViewController {
     
@@ -26,6 +28,15 @@ class ViewController: UIViewController {
         passwordLabel.text = "パスワード"
         setConstrains()
     }
+  
+  //        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+//            if let error = error {
+//                print("Error creating user: \(error.localizedDescription)")
+//            } else {
+//                print("User created successfully.")
+//                // 新しいユーザーアカウントが作成された場合の処理をここに追加
+//            }
+//        }
     
     func setConstrains() {
         view.addSubview(emailLabel)
@@ -39,9 +50,9 @@ class ViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(emailLabel.snp.bottom).offset(100)
         }
-    }
-
-
+    
+    let email = "test@test.com"
+    let password = "password"
 }
 
 // MARK: - SwiftUI Preview
