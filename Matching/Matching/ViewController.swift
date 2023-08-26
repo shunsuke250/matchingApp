@@ -6,15 +6,25 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseAuth
 
 class ViewController: UIViewController {
+    
+    let email = "test@test.com"
+    let password = "password"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         view.backgroundColor = .white
+//        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+//            if let error = error {
+//                print("Error creating user: \(error.localizedDescription)")
+//            } else {
+//                print("User created successfully.")
+//                // 新しいユーザーアカウントが作成された場合の処理をここに追加
+//            }
+//        }
     }
-
-
 }
 
