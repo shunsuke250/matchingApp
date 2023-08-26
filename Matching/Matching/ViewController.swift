@@ -17,58 +17,85 @@ class ViewController: UIViewController {
         return $0
     }(UILabel())
     
+    private let emailTextField: UITextField = {
+        $0.borderStyle = .roundedRect
+        return $0
+    }(UITextField())
+    
     private let passwordLabel: UILabel = {
         return $0
     }(UILabel())
     
+    private let passwordTextField: UITextField = {
+        $0.borderStyle = .roundedRect
+        return $0
+    }(UITextField())
+    
+    let email = "test@test.com"
+    let password = "password"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
         emailLabel.text = "メールアドレス"
         passwordLabel.text = "パスワード"
         setConstrains()
     }
-  
-  //        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-//            if let error = error {
-//                print("Error creating user: \(error.localizedDescription)")
-//            } else {
-//                print("User created successfully.")
-//                // 新しいユーザーアカウントが作成された場合の処理をここに追加
-//            }
-//        }
+    
+    //        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+    //            if let error = error {
+    //                print("Error creating user: \(error.localizedDescription)")
+    //            } else {
+    //                print("User created successfully.")
+    //                // 新しいユーザーアカウントが作成された場合の処理をここに追加
+    //            }
+    //        }
     
     func setConstrains() {
         view.addSubview(emailLabel)
+        view.addSubview(emailTextField)
         view.addSubview(passwordLabel)
+        view.addSubview(passwordTextField)
+        
         
         emailLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(100)
+            $0.top.equalToSuperview().offset(200)
+        }
+        emailTextField.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(emailLabel.snp.bottom).offset(10)
+            $0.width.equalTo(100)
         }
         passwordLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(emailLabel.snp.bottom).offset(100)
+            $0.top.equalTo(emailTextField.snp.bottom).offset(100)
         }
-    
-    let email = "test@test.com"
-    let password = "password"
-}
-
-// MARK: - SwiftUI Preview
-struct UIViewControllerPreviewWrapper: UIViewControllerRepresentable {
-    let previewController: UIViewController
-
-    func makeUIViewController(context: Context) -> UIViewController {
-        return self.previewController
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        passwordTextField.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(passwordLabel.snp.bottom).offset(10)
+            $0.width.equalTo(100)
+        }
     }
 }
 
+// MARK: - SwiftUI Preview Extension
+extension UIViewController {
+    struct PreviewWrapper: UIViewControllerRepresentable {
+        let viewController: UIViewController
+
+        func makeUIViewController(context: Context) -> UIViewController {
+            return viewController
+        }
+
+        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        }
+    }
+}
+
+// MARK: - SwiftUI Preview Provider
 struct ViewControllerPreview: PreviewProvider {
     static var previews: some View {
-        UIViewControllerPreviewWrapper(previewController: ViewController())
+        UIViewController.PreviewWrapper(viewController: ViewController())
     }
 }
