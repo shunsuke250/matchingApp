@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     
     private let emailTextField: UITextField = {
         $0.borderStyle = .roundedRect
+        $0.placeholder = "example@example.com"
         return $0
     }(UITextField())
     
