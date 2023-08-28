@@ -28,8 +28,15 @@ class ViewController: UIViewController {
     
     private let passwordTextField: UITextField = {
         $0.borderStyle = .roundedRect
+        $0.isSecureTextEntry = true
         return $0
     }(UITextField())
+    
+    private let createAccountButton: UIButton = {
+        $0.setTitle("アカウント作成", for: .normal)
+        $0.backgroundColor = .systemCyan
+        return $0
+    }(UIButton())
     
     let email = "test@test.com"
     let password = "password"
