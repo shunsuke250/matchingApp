@@ -48,16 +48,22 @@ class ViewController: UIViewController {
         emailLabel.text = "メールアドレス"
         passwordLabel.text = "パスワード"
         setConstrains()
+        
+        createAccountButton.addAction(.init { [weak self] _ in
+            guard let email = self?.emailTextField.text,
+                  let password = self?.passwordTextField.text else { return }
+            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                if let error = error {
+                    print("Error creating user: \(error.localizedDescription)")
+                } else {
+                    // 新しいユーザーアカウントが作成された場合の処理をここに追加
+                    print("User created successfully.")
+                }
+            }
+        }, for: .touchUpInside)
     }
     
-    //        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-    //            if let error = error {
-    //                print("Error creating user: \(error.localizedDescription)")
-    //            } else {
-    //                print("User created successfully.")
-    //                // 新しいユーザーアカウントが作成された場合の処理をここに追加
-    //            }
-    //        }
+    
     
     func setConstrains() {
         view.addSubview(emailLabel)
