@@ -39,9 +39,6 @@ class ViewController: UIViewController {
         return $0
     }(UIButton())
     
-    let email = "test@test.com"
-    let password = "password"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
@@ -62,8 +59,7 @@ class ViewController: UIViewController {
             }
         }, for: .touchUpInside)
     }
-    
-    
+        
     
     func setConstrains() {
         view.addSubview(emailLabel)
