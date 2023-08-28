@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordLabel)
         view.addSubview(passwordTextField)
-        
+        view.addSubview(createAccountButton)
         
         emailLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -73,16 +73,23 @@ class ViewController: UIViewController {
         emailTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(emailLabel.snp.bottom).offset(10)
-            $0.width.equalTo(100)
+            $0.leftMargin.equalTo(30)
+            $0.rightMargin.equalTo(30)
         }
         passwordLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(emailTextField.snp.bottom).offset(100)
+            $0.top.equalTo(emailTextField.snp.bottom).offset(50)
         }
         passwordTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(passwordLabel.snp.bottom).offset(10)
-            $0.width.equalTo(100)
+            $0.leftMargin.equalTo(30)
+            $0.rightMargin.equalTo(30)
+        }
+        createAccountButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(passwordTextField.snp.bottom).offset(50)
+            $0.width.greaterThanOrEqualTo(150)
         }
     }
 }
