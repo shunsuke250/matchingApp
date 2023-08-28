@@ -97,5 +97,6 @@ extension UIViewController {
 struct ViewControllerPreview: PreviewProvider {
     static var previews: some View {
         UIViewController.PreviewWrapper(viewController: ViewController())
+            .edgesIgnoringSafeArea(.all)
     }
 }
