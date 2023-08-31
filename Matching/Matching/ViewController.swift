@@ -47,21 +47,18 @@ class ViewController: UIViewController {
         return $0
     }(UILabel())
     
+    private let switchToLoginButton: UIButton = {
+        $0.setTitle("ログインはこちら", for: .normal)
+        return $0
+    }(UIButton())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
         emailLabel.text = "メールアドレス"
         passwordLabel.text = "パスワード"
         setConstrains()
-        
-        createAccountButton.addAction(.init { [weak self] _ in
-            guard let email = self?.emailTextField.text,
-                  let password = self?.passwordTextField.text else { return }
-            self?.createAccount(email: email, password: password)
-            let listViewController = ListViewController()
-            let navigationController = UINavigationController(rootViewController: listViewController)
-            self?.present(navigationController, animated: true, completion: nil)
-        }, for: .touchUpInside)
+        setButtonAction()
     }
     
     
@@ -72,6 +69,7 @@ class ViewController: UIViewController {
         view.addSubview(passwordTextField)
         view.addSubview(errorLabel)
         view.addSubview(createAccountButton)
+        view.addSubview(switchToLoginButton)
         
         emailLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -104,6 +102,23 @@ class ViewController: UIViewController {
             $0.top.equalTo(passwordTextField.snp.bottom).offset(60)
             $0.width.greaterThanOrEqualTo(150)
         }
+        switchToLoginButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(createAccountButton.snp.bottom).offset(10)
+            $0.width.greaterThanOrEqualTo(150)
+        }
+    }
+    
+    func setButtonAction() {
+        createAccountButton.addAction(.init { [weak self] _ in
+            guard let email = self?.emailTextField.text,
+                  let password = self?.passwordTextField.text else { return }
+            self?.createAccount(email: email, password: password)
+        }, for: .touchUpInside)
+        
+        switchToLoginButton.addAction(.init { [weak self] _ in
+            // ログイン画面へ遷移する処理
+        }, for: .touchUpInside)
     }
     
     func createAccount(email: String, password: String) {
@@ -116,7 +131,8 @@ class ViewController: UIViewController {
                 print("User created successfully.")
                 self.errorLabel.text = ""
                 let listViewController = ListViewController()
-                self.navigationController?.pushViewController(listViewController, animated: true)
+                let navigationController = UINavigationController(rootViewController: listViewController)
+                self.present(navigationController, animated: true, completion: nil)
             }
         }
     }
