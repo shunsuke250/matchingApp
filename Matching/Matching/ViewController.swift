@@ -164,8 +164,8 @@ class ViewController: UIViewController {
     
     func checkPasswordCorrect(password: String, passwordConfirmation: String) -> Bool {
         if password != passwordConfirmation {
-            errorLabel.text = "Password is not correct."
-            print("password is not correct")
+            errorLabel.text = "The Password is incorrect."
+            print("The password is incorrect")
             return false
         }
         return true
