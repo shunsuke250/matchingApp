@@ -14,6 +14,7 @@ import FirebaseAuth
 class ViewController: UIViewController {
     
     private let emailLabel: UILabel = {
+        $0.text = "メールアドレス"
         return $0
     }(UILabel())
     
@@ -25,6 +26,7 @@ class ViewController: UIViewController {
     }(UITextField())
     
     private let passwordLabel: UILabel = {
+        $0.text = "パスワード"
         return $0
     }(UILabel())
     
@@ -55,8 +57,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-        emailLabel.text = "メールアドレス"
-        passwordLabel.text = "パスワード"
         setConstrains()
         setButtonAction()
     }
