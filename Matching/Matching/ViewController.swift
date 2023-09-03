@@ -74,15 +74,11 @@ class ViewController: UIViewController {
     
     
     func setConstrains() {
-        view.addSubview(emailLabel)
-        view.addSubview(emailTextField)
-        view.addSubview(passwordLabel)
-        view.addSubview(newPasswordTextField)
-        view.addSubview(passwordConfirmationTextField)
-        view.addSubview(errorLabel)
-        view.addSubview(createAccountButton)
-        view.addSubview(switchToLoginButton)
-        
+        let uiElements = [emailLabel, emailTextField, passwordLabel, newPasswordTextField, passwordConfirmationTextField, errorLabel, createAccountButton, switchToLoginButton]
+        for element in uiElements {
+            view.addSubview(element)
+        }
+
         emailLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(100)
@@ -165,7 +161,7 @@ class ViewController: UIViewController {
     func checkPasswordCorrect(password: String, passwordConfirmation: String) -> Bool {
         if password != passwordConfirmation {
             errorLabel.text = "The Password is incorrect."
-            print("The password is incorrect")
+            print("The password is incorrect.")
             return false
         }
         return true

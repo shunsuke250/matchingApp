@@ -60,19 +60,14 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .lightGray
         setConstrains()
         setButtonAction()
-        // Test error label
-        errorLabel.text = "Test: The password must be 6 characters long or more."
     }
     
     func setConstrains() {
-        view.addSubview(emailLabel)
-        view.addSubview(emailTextField)
-        view.addSubview(passwordLabel)
-        view.addSubview(passwordTextField)
-        view.addSubview(errorLabel)
-        view.addSubview(loginButton)
-        view.addSubview(switchToCreateAccountButton)
-        
+        let uiElements = [emailLabel, emailTextField, passwordLabel, passwordTextField, errorLabel, loginButton, switchToCreateAccountButton]
+        for element in uiElements {
+            view.addSubview(element)
+        }
+
         emailLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(100)
@@ -133,7 +128,11 @@ class LoginViewController: UIViewController {
                 self?.errorLabel.text = ("\(error.localizedDescription)")
             } else {
                 print("Success Login")
-                self?.errorLabel.text = "Success Login"
+                // ListViewControllerへ画面遷移
+                let listViewController = ListViewController()
+                let navigationController = UINavigationController(rootViewController: listViewController)
+                navigationController.modalPresentationStyle = .fullScreen
+                self?.present(navigationController, animated: true, completion: nil)
             }
         }
     }
