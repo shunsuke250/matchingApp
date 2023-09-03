@@ -85,7 +85,7 @@ class ViewController: UIViewController {
         
         emailLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(140)
+            $0.top.equalToSuperview().offset(100)
         }
         emailTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -97,7 +97,7 @@ class ViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(emailTextField.snp.bottom).offset(30)
         }
-        passwordTextField.snp.makeConstraints {
+        newPasswordTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(passwordLabel.snp.bottom).offset(10)
             $0.leftMargin.equalTo(30)
@@ -117,7 +117,7 @@ class ViewController: UIViewController {
         }
         createAccountButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(60)
+            $0.top.equalTo(passwordConfirmationTextField.snp.bottom).offset(50)
             $0.width.greaterThanOrEqualTo(150)
         }
         switchToLoginButton.snp.makeConstraints {
@@ -130,12 +130,19 @@ class ViewController: UIViewController {
     func setButtonAction() {
         createAccountButton.addAction(.init { [weak self] _ in
             guard let email = self?.emailTextField.text,
-                  let password = self?.passwordTextField.text else { return }
-            self?.createAccount(email: email, password: password)
+                  let password = self?.newPasswordTextField.text,
+                  let passwordConfirmation = self?.passwordConfirmationTextField.text else { return }
+            if (self?.checkPasswordCorrect(password: password, passwordConfirmation: passwordConfirmation) != false) {
+                self?.createAccount(email: email, password: password)
+            }
         }, for: .touchUpInside)
         
         switchToLoginButton.addAction(.init { [weak self] _ in
             // ログイン画面へ遷移する処理
+            let loginViewController = LoginViewController()
+            let navigationController = UINavigationController(rootViewController: loginViewController)
+            navigationController.modalPresentationStyle = .fullScreen
+            self?.present(navigationController, animated: true, completion: nil)
         }, for: .touchUpInside)
     }
     
@@ -153,6 +160,15 @@ class ViewController: UIViewController {
                 self.present(navigationController, animated: true, completion: nil)
             }
         }
+    }
+    
+    func checkPasswordCorrect(password: String, passwordConfirmation: String) -> Bool {
+        if password != passwordConfirmation {
+            errorLabel.text = "Password is not correct."
+            print("password is not correct")
+            return false
+        }
+        return true
     }
 }
 
