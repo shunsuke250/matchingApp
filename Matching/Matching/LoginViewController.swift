@@ -129,7 +129,6 @@ class LoginViewController: UIViewController {
     
     func login(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-            guard let strongSelf = self else { return }
             if let error = error {
                 self?.errorLabel.text = ("\(error.localizedDescription)")
             } else {
