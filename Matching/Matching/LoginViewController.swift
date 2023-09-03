@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -126,6 +128,14 @@ class LoginViewController: UIViewController {
     }
     
     func login(email: String, password: String) {
-        // Firebaseのログイン機能を実装する
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let strongSelf = self else { return }
+            if let error = error {
+                self?.errorLabel.text = ("\(error.localizedDescription)")
+            } else {
+                print("Success Login")
+                self?.errorLabel.text = "Success Login"
+            }
+        }
     }
 }
