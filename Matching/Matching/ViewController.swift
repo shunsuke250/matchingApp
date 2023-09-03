@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     
     private let emailTextField: UITextField = {
         $0.borderStyle = .roundedRect
+        $0.textContentType = .emailAddress
         $0.placeholder = "example@example.com"
         $0.autocapitalizationType = .none // 最初の文字を大文字にしない
         return $0
@@ -36,9 +37,19 @@ class ViewController: UIViewController {
         return $0
     }(UIButton())
     
-    private let passwordTextField: UITextField = {
+    private let newPasswordTextField: UITextField = {
         $0.borderStyle = .roundedRect
+        $0.textContentType = .newPassword
         $0.isSecureTextEntry = true
+        $0.placeholder = "パスワードを入力"
+        return $0
+    }(UITextField())
+    
+    private let passwordConfirmationTextField: UITextField = {
+        $0.borderStyle = .roundedRect
+        $0.textContentType = .newPassword
+        $0.isSecureTextEntry = true
+        $0.placeholder = "パスワードを入力（確認）"
         return $0
     }(UITextField())
     
@@ -66,7 +77,8 @@ class ViewController: UIViewController {
         view.addSubview(emailLabel)
         view.addSubview(emailTextField)
         view.addSubview(passwordLabel)
-        view.addSubview(passwordTextField)
+        view.addSubview(newPasswordTextField)
+        view.addSubview(passwordConfirmationTextField)
         view.addSubview(errorLabel)
         view.addSubview(createAccountButton)
         view.addSubview(switchToLoginButton)
@@ -91,9 +103,15 @@ class ViewController: UIViewController {
             $0.leftMargin.equalTo(30)
             $0.rightMargin.equalTo(30)
         }
+        passwordConfirmationTextField.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(newPasswordTextField.snp.bottom).offset(10)
+            $0.leftMargin.equalTo(30)
+            $0.rightMargin.equalTo(30)
+        }
         errorLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(10)
+            $0.top.equalTo(passwordConfirmationTextField.snp.bottom).offset(10)
             $0.leftMargin.equalTo(30)
             $0.rightMargin.equalTo(30)
         }
