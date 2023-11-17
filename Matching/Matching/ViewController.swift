@@ -12,7 +12,27 @@ import FirebaseCore
 import FirebaseAuth
 
 class ViewController: UIViewController {
-    
+    private lazy var emailStackView: UIStackView = {
+        $0.axis = .vertical
+        $0.spacing = 10
+        return $0
+    }(UIStackView(arrangedSubviews: [emailLabel, emailTextField]))
+
+    private lazy var passwordStackView: UIStackView = {
+        $0.axis = .vertical
+        return $0
+    }(UIStackView(arrangedSubviews: [passwordLabel, newPasswordTextField, passwordConfirmationTextField]))
+
+    private lazy var bottomStackView: UIStackView = {
+        $0.axis = .vertical
+        return $0
+    }(UIStackView(arrangedSubviews: [createAccountButton, switchToLoginButton, errorLabel]))
+
+    private lazy var parentStackView: UIStackView = {
+        $0.axis = .vertical
+        return $0
+    }(UIStackView(arrangedSubviews: [emailStackView, passwordStackView, bottomStackView]))
+
     private let emailLabel: UILabel = {
         $0.text = "メールアドレス"
         return $0
