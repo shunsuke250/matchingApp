@@ -20,6 +20,7 @@ class ViewController: UIViewController {
 
     private lazy var passwordStackView: UIStackView = {
         $0.axis = .vertical
+        $0.spacing = 10
         return $0
     }(UIStackView(arrangedSubviews: [passwordLabel, newPasswordTextField, passwordConfirmationTextField]))
 
@@ -30,6 +31,7 @@ class ViewController: UIViewController {
 
     private lazy var parentStackView: UIStackView = {
         $0.axis = .vertical
+        $0.spacing = 20
         return $0
     }(UIStackView(arrangedSubviews: [emailStackView, passwordStackView, bottomStackView]))
 
@@ -92,54 +94,12 @@ class ViewController: UIViewController {
         setButtonAction()
     }
     
-    
     func setConstrains() {
-        let uiElements = [emailLabel, emailTextField, passwordLabel, newPasswordTextField, passwordConfirmationTextField, errorLabel, createAccountButton, switchToLoginButton]
-        for element in uiElements {
-            view.addSubview(element)
-        }
+        view.addSubview(parentStackView)
 
-        emailLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+        parentStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(100)
-        }
-        emailTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(emailLabel.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        passwordLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(emailTextField.snp.bottom).offset(30)
-        }
-        newPasswordTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordLabel.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        passwordConfirmationTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(newPasswordTextField.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        errorLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordConfirmationTextField.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        createAccountButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordConfirmationTextField.snp.bottom).offset(50)
-            $0.width.greaterThanOrEqualTo(150)
-        }
-        switchToLoginButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(createAccountButton.snp.bottom).offset(10)
-            $0.width.greaterThanOrEqualTo(150)
         }
     }
     
