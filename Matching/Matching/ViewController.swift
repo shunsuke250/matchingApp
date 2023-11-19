@@ -12,9 +12,32 @@ import FirebaseCore
 import FirebaseAuth
 
 class ViewController: UIViewController {
-    
+    private lazy var emailStackView: UIStackView = {
+        $0.axis = .vertical
+        $0.spacing = 10
+        return $0
+    }(UIStackView(arrangedSubviews: [emailLabel, emailTextField]))
+
+    private lazy var passwordStackView: UIStackView = {
+        $0.axis = .vertical
+        $0.spacing = 10
+        return $0
+    }(UIStackView(arrangedSubviews: [passwordLabel, newPasswordTextField, passwordConfirmationTextField]))
+
+    private lazy var bottomStackView: UIStackView = {
+        $0.axis = .vertical
+        return $0
+    }(UIStackView(arrangedSubviews: [createAccountButton, switchToLoginButton, errorLabel]))
+
+    private lazy var parentStackView: UIStackView = {
+        $0.axis = .vertical
+        $0.spacing = 20
+        return $0
+    }(UIStackView(arrangedSubviews: [emailStackView, passwordStackView, bottomStackView]))
+
     private let emailLabel: UILabel = {
         $0.text = "メールアドレス"
+        $0.textAlignment = .center
         return $0
     }(UILabel())
     
@@ -28,6 +51,7 @@ class ViewController: UIViewController {
     
     private let passwordLabel: UILabel = {
         $0.text = "パスワード"
+        $0.textAlignment = .center
         return $0
     }(UILabel())
     
@@ -72,58 +96,12 @@ class ViewController: UIViewController {
         setButtonAction()
     }
     
-    
     func setConstrains() {
-        view.addSubview(emailLabel)
-        view.addSubview(emailTextField)
-        view.addSubview(passwordLabel)
-        view.addSubview(newPasswordTextField)
-        view.addSubview(passwordConfirmationTextField)
-        view.addSubview(errorLabel)
-        view.addSubview(createAccountButton)
-        view.addSubview(switchToLoginButton)
-        
-        emailLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+        view.addSubview(parentStackView)
+
+        parentStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(100)
-        }
-        emailTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(emailLabel.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        passwordLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(emailTextField.snp.bottom).offset(30)
-        }
-        newPasswordTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordLabel.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        passwordConfirmationTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(newPasswordTextField.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        errorLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordConfirmationTextField.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        createAccountButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordConfirmationTextField.snp.bottom).offset(50)
-            $0.width.greaterThanOrEqualTo(150)
-        }
-        switchToLoginButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(createAccountButton.snp.bottom).offset(10)
-            $0.width.greaterThanOrEqualTo(150)
         }
     }
     
@@ -165,7 +143,7 @@ class ViewController: UIViewController {
     func checkPasswordCorrect(password: String, passwordConfirmation: String) -> Bool {
         if password != passwordConfirmation {
             errorLabel.text = "The Password is incorrect."
-            print("The password is incorrect")
+            print("The password is incorrect.")
             return false
         }
         return true
