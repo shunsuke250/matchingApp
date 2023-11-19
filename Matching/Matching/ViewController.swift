@@ -102,6 +102,7 @@ class ViewController: UIViewController {
         parentStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(100)
             $0.centerX.equalToSuperview()
+            $0.width.equalTo(300)
         }
     }
     
