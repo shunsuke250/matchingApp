@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     
     private let emailLabel: UILabel = {
         $0.text = "メールアドレス"
+        $0.textAlignment = .center
         return $0
     }(UILabel())
     
@@ -26,6 +27,7 @@ class LoginViewController: UIViewController {
     
     private let passwordLabel: UILabel = {
         $0.text = "パスワード"
+        $0.textAlignment = .center
         return $0
     }(UILabel())
     
