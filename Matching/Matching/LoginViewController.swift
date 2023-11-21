@@ -10,6 +10,34 @@ import FirebaseCore
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
+    private lazy var emailStackView: UIStackView = {
+        $0.axis = .vertical
+        $0.spacing = 10
+        return $0
+    }(UIStackView(arrangedSubviews: [emailLabel, emailTextField]))
+
+    private lazy var passwordStackView: UIStackView = {
+        $0.axis = .vertical
+        $0.spacing = 10
+        return $0
+    }(UIStackView(arrangedSubviews: [passwordLabel, passwordTextField]))
+
+    private lazy var topStackView: UIStackView = {
+        $0.axis = .vertical
+        $0.spacing = 20
+        return $0
+    }(UIStackView(arrangedSubviews: [emailStackView, passwordStackView]))
+
+    private lazy var bottomStackView: UIStackView = {
+        $0.axis = .vertical
+        return $0
+    }(UIStackView(arrangedSubviews: [loginButton, switchToCreateAccountButton, errorLabel]))
+    
+    private lazy var parentStackView: UIStackView = {
+        $0.axis = .vertical
+        $0.spacing = 60
+        return $0
+    }(UIStackView(arrangedSubviews: [topStackView, bottomStackView]))
     
     private let emailLabel: UILabel = {
         $0.text = "メールアドレス"
@@ -65,46 +93,12 @@ class LoginViewController: UIViewController {
     }
     
     func setConstrains() {
-        let uiElements = [emailLabel, emailTextField, passwordLabel, passwordTextField, errorLabel, loginButton, switchToCreateAccountButton]
-        for element in uiElements {
-            view.addSubview(element)
-        }
-
-        emailLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
+        view.addSubview(parentStackView)
+        
+        parentStackView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(100)
-        }
-        emailTextField.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(emailLabel.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        passwordLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(emailTextField.snp.bottom).offset(30)
-        }
-        passwordTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordLabel.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        errorLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(10)
-            $0.leftMargin.equalTo(30)
-            $0.rightMargin.equalTo(30)
-        }
-        loginButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(passwordTextField.snp.bottom).offset(60)
-            $0.width.greaterThanOrEqualTo(150)
-        }
-        switchToCreateAccountButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(loginButton.snp.bottom).offset(10)
-            $0.width.greaterThanOrEqualTo(150)
+            $0.width.equalTo(300)
         }
     }
     
