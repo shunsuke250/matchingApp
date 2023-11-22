@@ -26,8 +26,7 @@ class ListViewController: UIViewController {
         view.addSubview(tableView)
         
         tableView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.margins.equalTo(0)
+            $0.edges.equalToSuperview()
         }
     }
 }
