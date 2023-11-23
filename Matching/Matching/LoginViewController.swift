@@ -61,6 +61,7 @@ class LoginViewController: UIViewController {
     
     private let loginButton: UIButton = {
         $0.setTitle("ログイン", for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 21.0, weight: .bold)
         $0.backgroundColor = .systemCyan
         return $0
     }(UIButton())

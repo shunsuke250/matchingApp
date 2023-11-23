@@ -57,6 +57,7 @@ class ViewController: UIViewController {
     
     private let createAccountButton: UIButton = {
         $0.setTitle("アカウント作成", for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 21.0, weight: .bold)
         $0.backgroundColor = .systemCyan
         return $0
     }(UIButton())
